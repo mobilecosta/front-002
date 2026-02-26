@@ -1,0 +1,54 @@
+<section class="dashboard-shell">
+  <header>
+    <h1>Dashboard Financeiro</h1>
+    <button type="button" (click)="logout()">Sair</button>
+  </header>
+
+  @if (loading()) {
+    <p>Carregando...</p>
+  } @else if (error()) {
+    <p class="error">{{ error() }}</p>
+  } @else if (data(); as d) {
+    <div class="cards">
+      <article>
+        <h2>Saldo Total</h2>
+        <strong>{{ d.totalBalance | currency:'BRL':'symbol':'1.2-2' }}</strong>
+      </article>
+      <article>
+        <h2>Receitas do Mês</h2>
+        <strong>{{ d.monthIncome | currency:'BRL':'symbol':'1.2-2' }}</strong>
+      </article>
+      <article>
+        <h2>Despesas do Mês</h2>
+        <strong>{{ d.monthExpense | currency:'BRL':'symbol':'1.2-2' }}</strong>
+      </article>
+    </div>
+
+    <section class="tables">
+      <div>
+        <h3>Despesas por Categoria</h3>
+        <ul>
+          @for (item of d.expensesByCategory; track item.categoryName) {
+            <li>
+              <span>{{ item.categoryName }}</span>
+              <span>{{ item.amount | currency:'BRL':'symbol':'1.2-2' }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3>Evolução Mensal</h3>
+        <ul>
+          @for (item of d.monthlyEvolution; track item.month) {
+            <li>
+              <span>{{ item.month }}</span>
+              <span>+ {{ item.income | currency:'BRL':'symbol':'1.2-2' }}</span>
+              <span>- {{ item.expense | currency:'BRL':'symbol':'1.2-2' }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </section>
+  }
+</section>

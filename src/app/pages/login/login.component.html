@@ -1,0 +1,37 @@
+<section class="auth-shell">
+  <div class="auth-card">
+    <h1>Finance Control</h1>
+    <p>{{ mode === 'login' ? 'Entre na sua conta' : 'Crie sua conta' }}</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      @if (mode === 'register') {
+        <label>
+          Nome
+          <input type="text" formControlName="name" placeholder="Seu nome" />
+        </label>
+      }
+
+      <label>
+        E-mail
+        <input type="email" formControlName="email" placeholder="voce@empresa.com" />
+      </label>
+
+      <label>
+        Senha
+        <input type="password" formControlName="password" placeholder="******" />
+      </label>
+
+      @if (error) {
+        <small class="error">{{ error }}</small>
+      }
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Processando...' : mode === 'login' ? 'Entrar' : 'Cadastrar' }}
+      </button>
+    </form>
+
+    <a href="#" (click)="$event.preventDefault(); toggleMode()">
+      {{ mode === 'login' ? 'Criar uma conta' : 'Já tenho conta' }}
+    </a>
+  </div>
+</section>
