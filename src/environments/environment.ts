@@ -1,6 +1,1 @@
-const apiUrl = (import.meta.env.VITE_API_URL ?? "http://localhost:3000").replace(/\/$/, "");
-
-export const environment = {
-  production: false,
-  apiUrl
-};
+export const environment={production:false,apiUrl:'http://localhost:3000/api'};
