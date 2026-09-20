@@ -1,6 +1,1 @@
-const apiUrl = (import.meta.env.VITE_API_URL ?? "https://api.example.com").replace(/\/$/, "");
-
-export const environment = {
-  production: true,
-  apiUrl
-};
+export const environment={production:true,apiUrl:'https://financas-mobile-api.vercel.app/api'};
